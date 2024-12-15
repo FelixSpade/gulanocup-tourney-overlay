@@ -67,11 +67,11 @@ let scoreRight = [];
 let tempLastPick = "Blue";
 
 const mods = {
-  RC: 0,
-  LN: 1,
-  HB: 2,
-  SV: 3,
-  WC: 4,
+  NM: 0,
+  HD: 1,
+  HR: 2,
+  DT: 3,
+  FM: 4,
   TB: 5,
 };
 
@@ -82,7 +82,6 @@ class Beatmap {
     this.layerName = layerName;
   }
   generate() {
-    
     let mappoolContainer = document.getElementById(`${this.mods}`);
 
     this.clicker = document.createElement("div");
@@ -182,11 +181,11 @@ async function setupBeatmaps() {
   hasSetup = true;
 
   const modsCount = {
-    RC: 0,
-    LN: 0,
-    HB: 0,
-    SV: 0,
-    WC: 0,
+    NM: 0,
+    HD: 0,
+    HR: 0,
+    DT: 0,
+    FM: 0,
     TB: 0,
   };
 
@@ -276,7 +275,7 @@ async function setupBeatmaps() {
 
 async function getDataSet(beatmapID) {
   try {
-    const data = (await axios.get(`https://gulanovapi.vercel.app/api/b/${beatmapID}`))
+    const data = (await axios.get(`https://tryz.vercel.app/api/b/${beatmapID}`))
       .data;
     const diff = data.beatmaps.filter((diff) => diff.id === beatmapID).shift();
 
