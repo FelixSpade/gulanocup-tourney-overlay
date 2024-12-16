@@ -274,6 +274,15 @@ async function setupBeatmaps() {
 }
 
 async function getDataSet(beatmapID) {
+  if(beatmapID == 1 || beatmapID == 0){
+    return {
+        coverURL: './static/placeholder.jpg',
+        artist: "?",
+        title: "?",
+        version: "?",
+        creator: "?"
+    }
+}
   try {
     const data = (await axios.get(`https://gulanovapi.vercel.app/api/b/${beatmapID}`))
       .data;
