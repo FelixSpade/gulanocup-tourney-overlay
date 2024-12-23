@@ -29,6 +29,13 @@ let pickButtonR = document.getElementById("pickButtonR");
 let pickButtonB = document.getElementById("pickButtonB");
 let pickState = document.getElementById("pickState");
 
+// Wildcard container layer
+let pickerWC = document.getElementById("pickerWC");
+
+
+
+
+
 const beatmaps = new Set(); // Store beatmapID;
 
 socket.onopen = () => {
@@ -96,9 +103,11 @@ class Beatmap {
     this.difficulty = document.createElement("div");
     this.modIcon = document.createElement("div");
     this.pickedStatus = document.createElement("div");
+    this.protect = document.createElement("div");
 
     this.map.id = `${this.layerName}-BG`;
     this.overlay.id = `${this.layerName}-overlay`;
+    this.protect.id = `${this.layerName}-protect`;
     this.metadata.id = `${this.layerName}-metadata`;
     this.difficulty.id = `${this.layerName}-difficulty`;
     this.modIcon.id = `${this.layerName}-modicon`;
@@ -109,6 +118,7 @@ class Beatmap {
     this.map.setAttribute("class", "map");
     this.pickedStatus.setAttribute("class", "pickingStatus");
     this.overlay.setAttribute("class", "overlay");
+    this.protect.setAttribute("class", "protect");
     this.modIcon.setAttribute("class", "modIcon");
     this.modIcon.style.backgroundImage = `url("./static/${this.mods}.png")`;
     this.clicker.setAttribute("class", "clicker");
@@ -116,6 +126,7 @@ class Beatmap {
     document.getElementById(this.map.id).appendChild(this.overlay);
     document.getElementById(this.map.id).appendChild(this.metadata);
     document.getElementById(this.map.id).appendChild(this.difficulty);
+    document.getElementById(this.map.id).appendChild(this.protect);
     clickerObj.appendChild(this.pickedStatus);
     clickerObj.appendChild(this.modIcon);
 
@@ -126,15 +137,18 @@ class Beatmap {
   }
   PickedOn(type) {
     console.log(this)
-    if(this.pickedStatus.className == `banned${type}`){
+    if(this.pickedStatus.className == `bannedBlue` || this.pickedStatus.className == `bannedRed` || this.pickedStatus.className == `banned`){
       return
     }else{
     this.pickedStatus.className = `picked${type}`;
     this.overlay.style.opacity = "0.5";
     this.metadata.style.opacity = "1";
+  this.protect.style.opacity = this.protect.style.opacity;
     this.difficulty.style.opacity = "1";
     this.pickedStatus.innerHTML = "Picked";
   }
+
+  
 }
 }
 
@@ -235,40 +249,80 @@ async function setupBeatmaps() {
     };
     bm.clicker.addEventListener("mousedown", function () {
       bm.clicker.addEventListener("click", function (event) {
-        if (event.shiftKey) {
+        if (event.shiftKey && !event.altKey) {
           bm.pickedStatus.className = "bannedRed";
           bm.overlay.style.opacity = "0.8";
           bm.metadata.style.opacity = "0.3";
+          bm.protect.style.opacity = "0";
           bm.difficulty.style.opacity = "0.3";
           bm.pickedStatus.innerHTML = `Banned by ${team1}`;
-        } else if (event.ctrlKey) {
+      } else if (event.ctrlKey) {
           bm.overlay.style.opacity = "0.5";
           bm.metadata.style.opacity = "1";
           bm.difficulty.style.opacity = "1";
+          bm.protect.style.opacity = "0";
           bm.pickedStatus.className = "pickedStatus";
           bm.pickedStatus.innerHTML = "";
-        } else {
+      } else if (event.altKey && !event.shiftKey) {
+          bm.pickedStatus.className = "banned";
+          bm.overlay.style.opacity = "0.8";
+          bm.metadata.style.opacity = "0.3";
+          bm.protect.style.opacity = "0";
+          bm.difficulty.style.opacity = "0.3";
+          bm.pickedStatus.innerHTML = `Banned`;
+      }else if (event.altKey && event.shiftKey) {
+          bm.pickedStatus.className = "pickedStatus";
+          bm.protect.style.opacity = "1";
+          bm.protect.innerHTML = "Protect";
+          bm.protect.style.backgroundColor = "#de3950";
+
+          bm.overlay.style.opacity = "0.5";
+          bm.metadata.style.opacity = "1";
+          bm.difficulty.style.opacity = "1";
+      } else {
           bm.PickedOn("Red");
           if(bm.beatmapID == 1 || bm.beatmapID == 0){
-            console.log("work")
+
+            pickedWC(bm.beatmapID, bm.pickedStatus.className);
           }
         }
       });
       bm.clicker.addEventListener("contextmenu", function (event) {
-        if (event.shiftKey) {
+        if (event.shiftKey && !event.altKey) {
           bm.pickedStatus.className = "bannedBlue";
           bm.overlay.style.opacity = "0.8";
+          bm.protect.style.opacity = "0";
           bm.metadata.style.opacity = "0.3";
           bm.difficulty.style.opacity = "0.3";
           bm.pickedStatus.innerHTML = `Banned by ${team2}`;
-        } else if (event.ctrlKey) {
+      } else if (event.ctrlKey) {
           bm.overlay.style.opacity = "0.5";
           bm.metadata.style.opacity = "1";
           bm.difficulty.style.opacity = "1";
+          bm.protect.style.opacity = "0";
           bm.pickedStatus.className = "pickedStatus";
           bm.pickedStatus.innerHTML = "";
-        } else {
+      } else if (event.altKey && !event.shiftKey) {
+          bm.pickedStatus.className = "banned";
+          bm.overlay.style.opacity = "0.8";
+          bm.protect.style.opacity = "0";
+          bm.metadata.style.opacity = "0.3";
+          bm.difficulty.style.opacity = "0.3";
+          bm.pickedStatus.innerHTML = `Banned`;
+      }else if (event.altKey && event.shiftKey) {
+          bm.protect.style.opacity = "1";
+          bm.protect.innerHTML = "Protect";
+          bm.protect.style.backgroundColor = "#2982e3";
+
+          bm.pickedStatus.className = "pickedStatus";
+          bm.overlay.style.opacity = "0.5";
+          bm.metadata.style.opacity = "1";
+          bm.difficulty.style.opacity = "1";
+      } else {
           bm.PickedOn("Blue");
+          if(bm.beatmapID == 1 || bm.beatmapID == 0){
+            pickedWC(bm.beatmapID, bm.pickedStatus.className);
+          }
         }
       });
     });
@@ -308,6 +362,18 @@ async function getDataSet(beatmapID) {
   }
 }
 
+function pickedWC(id, banned){
+  if(banned == "bannedBlue" || banned == "bannedRed" || banned == "banned"){
+    return
+  }
+  pickerWC.style.visibility = "visible"
+  if(id == 1){
+    console.log(id);
+  }else if(id == 0){
+    console.log(id);
+  }
+}
+
 pickedOnManual = (id) => {
   tempLastPick = tempLastPick === "Red" ? "Blue" : "Red";
   if (document.getElementById(`id-${id}-clicker`)) {
@@ -323,3 +389,10 @@ pickedOnManual = (id) => {
     pickedStatus.innerHTML = "Picked";
   }
 };
+
+document.querySelector("form").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevents the default form submission
+  const selectValue = document.getElementById("WCmapid").value;
+  const inputValue = document.getElementById("inputWCmanual").value;
+  console.log(`${selectValue} ${inputValue}`);
+});

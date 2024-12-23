@@ -56,9 +56,23 @@
     <div id="sideBar">
         <div id="pickButtonR" class="pickButton"></div>
         <div id="pickButtonB" class="pickButton"></div>
+        
         <div id="pickState">First Team to pick: </div>
+        <div style="margin-top: 20px;">Input manual wildcard MAP ID</div>
+        <form> <select id="WCmapid" class="pickButton">
+            <option value="1">kiri</option>
+            <option value="0" >kanan</option>
+          </select><input id="inputWCmanual" type="text" class="pickButton"></input></form>
+        <div id="resetWILDCARD" class="pickButton">Reset WC</div>
+        <div id="tutupwilcard" class="pickButton">Close WC</div>
     </div>
     <script src="index.js"></script>
+    <script>document.getElementById("tutupwilcard").addEventListener("click", function() {
+        document.getElementById("pickerWC").style.visibility = "hidden";
+    });
+    
+
+</script>
 </body>
 
 </html>
