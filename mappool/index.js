@@ -125,12 +125,17 @@ class Beatmap {
     this.overlay.style.opacity = "1";
   }
   PickedOn(type) {
+    console.log(this)
+    if(this.pickedStatus.className == `banned${type}`){
+      return
+    }else{
     this.pickedStatus.className = `picked${type}`;
     this.overlay.style.opacity = "0.5";
     this.metadata.style.opacity = "1";
     this.difficulty.style.opacity = "1";
     this.pickedStatus.innerHTML = "Picked";
   }
+}
 }
 
 let bestOfTemp;
@@ -222,12 +227,12 @@ async function setupBeatmaps() {
       `id-${beatmap.beatmapId}`
     );
     bm.generate();
-    // bm.clicker.onmouseover = function () {
-    //   bm.clicker.style.transform = "translateY(-5px)";
-    // };
-    // bm.clicker.onmouseleave = function () {
-    //   bm.clicker.style.transform = "translateY(0px)";
-    // };
+    bm.clicker.onmouseover = function () {
+      bm.clicker.style.transform = "translateY(-5px)";
+    };
+    bm.clicker.onmouseleave = function () {
+      bm.clicker.style.transform = "translateY(0px)";
+    };
     bm.clicker.addEventListener("mousedown", function () {
       bm.clicker.addEventListener("click", function (event) {
         if (event.shiftKey) {
@@ -244,6 +249,9 @@ async function setupBeatmaps() {
           bm.pickedStatus.innerHTML = "";
         } else {
           bm.PickedOn("Red");
+          if(bm.beatmapID == 1 || bm.beatmapID == 0){
+            console.log("work")
+          }
         }
       });
       bm.clicker.addEventListener("contextmenu", function (event) {
