@@ -247,85 +247,102 @@ async function setupBeatmaps() {
     bm.clicker.onmouseleave = function () {
       bm.clicker.style.transform = "translateY(0px)";
     };
-    bm.clicker.addEventListener("mousedown", function () {
-      bm.clicker.addEventListener("click", function (event) {
-        if (event.shiftKey && !event.altKey) {
-          bm.pickedStatus.className = "bannedRed";
-          bm.overlay.style.opacity = "0.8";
-          bm.metadata.style.opacity = "0.3";
-          bm.protect.style.opacity = "0";
-          bm.difficulty.style.opacity = "0.3";
-          bm.pickedStatus.innerHTML = `Banned by ${team1}`;
-      } else if (event.ctrlKey) {
-          bm.overlay.style.opacity = "0.5";
-          bm.metadata.style.opacity = "1";
-          bm.difficulty.style.opacity = "1";
-          bm.protect.style.opacity = "0";
-          bm.pickedStatus.className = "pickedStatus";
-          bm.pickedStatus.innerHTML = "";
-      } else if (event.altKey && !event.shiftKey) {
-          bm.pickedStatus.className = "banned";
-          bm.overlay.style.opacity = "0.8";
-          bm.metadata.style.opacity = "0.3";
-          bm.protect.style.opacity = "0";
-          bm.difficulty.style.opacity = "0.3";
-          bm.pickedStatus.innerHTML = `Banned`;
-      }else if (event.altKey && event.shiftKey) {
-          bm.pickedStatus.className = "pickedStatus";
-          bm.protect.style.opacity = "1";
-          bm.protect.innerHTML = "Protect";
-          bm.protect.style.backgroundColor = "#de3950";
+    // Add a 'mousedown' event listener
+bm.clicker.addEventListener("mousedown", function (event) {
+  // Handle 'shift' key without 'alt'
+  if (event.shiftKey && !event.altKey) {
+    bm.pickedStatus.className = "bannedRed";
+    bm.overlay.style.opacity = "0.8";
+    bm.metadata.style.opacity = "0.3";
+    bm.protect.style.opacity = "0";
+    bm.difficulty.style.opacity = "0.3";
+    bm.pickedStatus.innerHTML = `Banned by ${team1}`;
+  }
+  // Handle 'ctrl' key
+  else if (event.ctrlKey) {
+    bm.overlay.style.opacity = "0.5";
+    bm.metadata.style.opacity = "1";
+    bm.difficulty.style.opacity = "1";
+    bm.protect.style.opacity = "0";
+    bm.pickedStatus.className = "pickedStatus";
+    bm.pickedStatus.innerHTML = "";
+  }
+  // Handle 'alt' key without 'shift'
+  else if (event.altKey && !event.shiftKey) {
+    bm.pickedStatus.className = "banned";
+    bm.overlay.style.opacity = "0.8";
+    bm.metadata.style.opacity = "0.3";
+    bm.protect.style.opacity = "0";
+    bm.difficulty.style.opacity = "0.3";
+    bm.pickedStatus.innerHTML = `Banned`;
+  }
+  // Handle both 'alt' and 'shift' keys
+  else if (event.altKey && event.shiftKey) {
+    bm.pickedStatus.className = "pickedStatus";
+    bm.protect.style.opacity = "1";
+    bm.protect.innerHTML = "Protect";
+    bm.protect.style.backgroundColor = "#de3950";
+    bm.overlay.style.opacity = "0.5";
+    bm.metadata.style.opacity = "1";
+    bm.difficulty.style.opacity = "1";
+  } 
+  // Default action
+  else {
+    bm.PickedOn("Red");
+    if (bm.beatmapID == 1 || bm.beatmapID == 0) {
+      pickedWC(bm.beatmapID, bm.pickedStatus.className);
+    }
+  }
+});
 
-          bm.overlay.style.opacity = "0.5";
-          bm.metadata.style.opacity = "1";
-          bm.difficulty.style.opacity = "1";
-      } else {
-          bm.PickedOn("Red");
-          if(bm.beatmapID == 1 || bm.beatmapID == 0){
+// Add a 'contextmenu' event listener
+bm.clicker.addEventListener("contextmenu", function (event) {
+  // Handle 'shift' key without 'alt'
+  if (event.shiftKey && !event.altKey) {
+    bm.pickedStatus.className = "bannedBlue";
+    bm.overlay.style.opacity = "0.8";
+    bm.protect.style.opacity = "0";
+    bm.metadata.style.opacity = "0.3";
+    bm.difficulty.style.opacity = "0.3";
+    bm.pickedStatus.innerHTML = `Banned by ${team2}`;
+  }
+  // Handle 'ctrl' key
+  else if (event.ctrlKey) {
+    bm.overlay.style.opacity = "0.5";
+    bm.metadata.style.opacity = "1";
+    bm.difficulty.style.opacity = "1";
+    bm.protect.style.opacity = "0";
+    bm.pickedStatus.className = "pickedStatus";
+    bm.pickedStatus.innerHTML = "";
+  }
+  // Handle 'alt' key without 'shift'
+  else if (event.altKey && !event.shiftKey) {
+    bm.pickedStatus.className = "banned";
+    bm.overlay.style.opacity = "0.8";
+    bm.protect.style.opacity = "0";
+    bm.metadata.style.opacity = "0.3";
+    bm.difficulty.style.opacity = "0.3";
+    bm.pickedStatus.innerHTML = `Banned`;
+  }
+  // Handle both 'alt' and 'shift' keys
+  else if (event.altKey && event.shiftKey) {
+    bm.protect.style.opacity = "1";
+    bm.protect.innerHTML = "Protect";
+    bm.protect.style.backgroundColor = "#2982e3";
+    bm.pickedStatus.className = "pickedStatus";
+    bm.overlay.style.opacity = "0.5";
+    bm.metadata.style.opacity = "1";
+    bm.difficulty.style.opacity = "1";
+  } 
+  // Default action
+  else {
+    bm.PickedOn("Blue");
+    if (bm.beatmapID == 1 || bm.beatmapID == 0) {
+      pickedWC(bm.beatmapID, bm.pickedStatus.className);
+    }
+  }
+});
 
-            pickedWC(bm.beatmapID, bm.pickedStatus.className);
-          }
-        }
-      });
-      bm.clicker.addEventListener("contextmenu", function (event) {
-        if (event.shiftKey && !event.altKey) {
-          bm.pickedStatus.className = "bannedBlue";
-          bm.overlay.style.opacity = "0.8";
-          bm.protect.style.opacity = "0";
-          bm.metadata.style.opacity = "0.3";
-          bm.difficulty.style.opacity = "0.3";
-          bm.pickedStatus.innerHTML = `Banned by ${team2}`;
-      } else if (event.ctrlKey) {
-          bm.overlay.style.opacity = "0.5";
-          bm.metadata.style.opacity = "1";
-          bm.difficulty.style.opacity = "1";
-          bm.protect.style.opacity = "0";
-          bm.pickedStatus.className = "pickedStatus";
-          bm.pickedStatus.innerHTML = "";
-      } else if (event.altKey && !event.shiftKey) {
-          bm.pickedStatus.className = "banned";
-          bm.overlay.style.opacity = "0.8";
-          bm.protect.style.opacity = "0";
-          bm.metadata.style.opacity = "0.3";
-          bm.difficulty.style.opacity = "0.3";
-          bm.pickedStatus.innerHTML = `Banned`;
-      }else if (event.altKey && event.shiftKey) {
-          bm.protect.style.opacity = "1";
-          bm.protect.innerHTML = "Protect";
-          bm.protect.style.backgroundColor = "#2982e3";
-
-          bm.pickedStatus.className = "pickedStatus";
-          bm.overlay.style.opacity = "0.5";
-          bm.metadata.style.opacity = "1";
-          bm.difficulty.style.opacity = "1";
-      } else {
-          bm.PickedOn("Blue");
-          if(bm.beatmapID == 1 || bm.beatmapID == 0){
-            pickedWC(bm.beatmapID, bm.pickedStatus.className);
-          }
-        }
-      });
-    });
     const mapData = await getDataSet(beatmap.beatmapId);
     bm.map.style.backgroundImage = `url('${mapData.coverURL}')`;
     bm.metadata.innerHTML = mapData.artist + " - " + mapData.title;
@@ -362,17 +379,6 @@ async function getDataSet(beatmapID) {
   }
 }
 
-function pickedWC(id, banned){
-  if(banned == "bannedBlue" || banned == "bannedRed" || banned == "banned"){
-    return
-  }
-  pickerWC.style.visibility = "visible"
-  if(id == 1){
-    console.log(id);
-  }else if(id == 0){
-    console.log(id);
-  }
-}
 
 pickedOnManual = (id) => {
   tempLastPick = tempLastPick === "Red" ? "Blue" : "Red";
@@ -396,3 +402,81 @@ document.querySelector("form").addEventListener("submit", function(event) {
   const inputValue = document.getElementById("inputWCmanual").value;
   console.log(`${selectValue} ${inputValue}`);
 });
+
+async function pickedWC(id, banned){
+  if(banned == "bannedBlue" || banned == "bannedRed" || banned == "banned"){
+    return
+  }
+
+  const matchID = document.getElementById("matchID"); if (!matchID.value) {matchID.value = "woi"; return;;;;;;;;;;;} //if kosong, GAJADI LOL
+
+  const data = await fetchData(matchID.value)
+
+  if(id == 1){
+    generateCard(data)
+    console.log(data);
+    
+    
+  }else if(id == 0){
+    generateCard(data)
+    console.log(data);
+  }
+
+  pickerWC.style.visibility = "visible"
+}
+async function fetchData(matchID) {
+  const url = `https://script.google.com/macros/s/AKfycbxyQ67MlGCrIK3AMNDdJ28ZS_vYqvSmR1T6bS-kr4-q06hMhPi2g-ERErw1nrfxCv4-TA/exec?action=getWC&matchID=${matchID}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();  // Get JSON data from response
+    console.log('Fetched data:', data);  // Log the fetched data
+    return data;  // Return the data to the calling function
+  } catch (error) {
+    console.error('Error fetching data:', error);  // Catch any errors
+    return null;  // Return null in case of an error
+  }
+}
+
+
+async function generateCard(data){
+// Get the container div with id "gacor"
+const container = document.getElementById("gacor");
+const backgrounds = [];
+console.log(data)
+
+// Array of background images
+for (let i = 0; i < Object.keys(data).length - 1; i++) {
+  const id = Object.keys(data)[i];
+  console.log(id)
+  try {
+    const response = await fetch(`https://gulanovapi.vercel.app/api/b/${id}`);
+    const result = await response.json();
+
+    console.log(result); // Log the result from the API
+    backgrounds.push(result.covers["card"])
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+console.log(backgrounds)
+
+// Loop through 1 to 50 to create 50 div elements
+for (let i = 1; i <= 50; i++) {
+  // Create a new div element
+  const itemDiv = document.createElement("div");
+  
+  // Set the id and class for the div
+  itemDiv.id = `item${i}`;
+  itemDiv.className = "rollItem";
+
+  // Set the background image to a random choice from the array
+  const randomIndex = Math.floor(Math.random() * backgrounds.length);
+  itemDiv.style.backgroundImage = `url("${backgrounds[randomIndex]}")`;
+  itemDiv.innerHTML = "?"
+
+
+  // Append the created div to the container
+  container.appendChild(itemDiv);
+}
+}

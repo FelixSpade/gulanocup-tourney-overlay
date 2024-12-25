@@ -21,22 +21,7 @@
         </div>
         <div id="rollercontainer">
             <div id="gacor">
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
-            <div id="item1" class="rollItem" >?</div>
+
         </div>
 
         </div>
@@ -65,12 +50,31 @@
           </select><input id="inputWCmanual" type="text" class="pickButton"></input></form>
         <div id="resetWILDCARD" class="pickButton">Reset WC</div>
         <div id="tutupwilcard" class="pickButton">Close WC</div>
+        <input id="matchID" type="text" class="pickButton"></input>
+        <div id="roll" class="pickButton">Roll</div>
     </div>
     <script src="index.js"></script>
-    <script>document.getElementById("tutupwilcard").addEventListener("click", function() {
+    <script>
+        const gacor = document.getElementById("gacor");
+        document.getElementById("tutupwilcard").addEventListener("click", function() {
         document.getElementById("pickerWC").style.visibility = "hidden";
+        const rollItems = document.querySelectorAll(".rollItem");
+
+        // Loop through each element and remove it
+        rollItems.forEach(item => {
+        item.remove();
+        });
+
+        gacor.style.marginTop = "10px"
     });
-    
+        document.getElementById("roll").addEventListener("click", function() {
+
+        gacor.style.marginTop = "-4690px"
+        // gacor.style.marginTop = "-4780px"
+
+            
+
+    });
 
 </script>
 </body>
