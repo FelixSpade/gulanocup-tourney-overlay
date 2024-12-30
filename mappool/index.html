@@ -59,7 +59,7 @@
         document.getElementById("tutupwilcard").addEventListener("click", function() {
         document.getElementById("pickerWC").style.visibility = "hidden";
         const rollItems = document.querySelectorAll(".rollItem");
-
+        
         // Loop through each element and remove it
         rollItems.forEach(item => {
         item.remove();
@@ -68,9 +68,22 @@
         gacor.style.marginTop = "10px"
     });
         document.getElementById("roll").addEventListener("click", function() {
-
+        
         gacor.style.marginTop = "-4690px"
         // gacor.style.marginTop = "-4780px"
+
+        const matchID = document.getElementById("matchID"); if (!matchID.value) {matchID.value = "woi"; return;;;;;;;;;;;} //if kosong, GAJADI LOL
+        const url = `https://script.google.com/macros/s/AKfycbxyQ67MlGCrIK3AMNDdJ28ZS_vYqvSmR1T6bS-kr4-q06hMhPi2g-ERErw1nrfxCv4-TA/exec?action=sendToRef&matchID=${matchID.value}`;
+        
+        try {   
+            const response = fetch(url);
+            const data = response.json();  // Get JSON data from response
+            console.log('Fetched data:', data);  // Log the fetched data
+            return data;  // Return the data to the calling function
+        } catch (error) {
+            console.error('Error fetching data:', error);  // Catch any errors
+            return null;  // Return null in case of an error
+        }
 
             
 

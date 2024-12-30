@@ -247,101 +247,108 @@ async function setupBeatmaps() {
     bm.clicker.onmouseleave = function () {
       bm.clicker.style.transform = "translateY(0px)";
     };
-    // Add a 'mousedown' event listener
-bm.clicker.addEventListener("mousedown", function (event) {
-  // Handle 'shift' key without 'alt'
-  if (event.shiftKey && !event.altKey) {
-    bm.pickedStatus.className = "bannedRed";
-    bm.overlay.style.opacity = "0.8";
-    bm.metadata.style.opacity = "0.3";
-    bm.protect.style.opacity = "0";
-    bm.difficulty.style.opacity = "0.3";
-    bm.pickedStatus.innerHTML = `Banned by ${team1}`;
-  }
-  // Handle 'ctrl' key
-  else if (event.ctrlKey) {
-    bm.overlay.style.opacity = "0.5";
-    bm.metadata.style.opacity = "1";
-    bm.difficulty.style.opacity = "1";
-    bm.protect.style.opacity = "0";
-    bm.pickedStatus.className = "pickedStatus";
-    bm.pickedStatus.innerHTML = "";
-  }
-  // Handle 'alt' key without 'shift'
-  else if (event.altKey && !event.shiftKey) {
-    bm.pickedStatus.className = "banned";
-    bm.overlay.style.opacity = "0.8";
-    bm.metadata.style.opacity = "0.3";
-    bm.protect.style.opacity = "0";
-    bm.difficulty.style.opacity = "0.3";
-    bm.pickedStatus.innerHTML = `Banned`;
-  }
-  // Handle both 'alt' and 'shift' keys
-  else if (event.altKey && event.shiftKey) {
-    bm.pickedStatus.className = "pickedStatus";
-    bm.protect.style.opacity = "1";
-    bm.protect.innerHTML = "Protect";
-    bm.protect.style.backgroundColor = "#de3950";
-    bm.overlay.style.opacity = "0.5";
-    bm.metadata.style.opacity = "1";
-    bm.difficulty.style.opacity = "1";
-  } 
-  // Default action
-  else {
-    bm.PickedOn("Red");
-    if (bm.beatmapID == 1 || bm.beatmapID == 0) {
-      pickedWC(bm.beatmapID, bm.pickedStatus.className);
-    }
-  }
-});
 
-// Add a 'contextmenu' event listener
-bm.clicker.addEventListener("contextmenu", function (event) {
-  // Handle 'shift' key without 'alt'
-  if (event.shiftKey && !event.altKey) {
-    bm.pickedStatus.className = "bannedBlue";
-    bm.overlay.style.opacity = "0.8";
-    bm.protect.style.opacity = "0";
-    bm.metadata.style.opacity = "0.3";
-    bm.difficulty.style.opacity = "0.3";
-    bm.pickedStatus.innerHTML = `Banned by ${team2}`;
-  }
-  // Handle 'ctrl' key
-  else if (event.ctrlKey) {
-    bm.overlay.style.opacity = "0.5";
-    bm.metadata.style.opacity = "1";
-    bm.difficulty.style.opacity = "1";
-    bm.protect.style.opacity = "0";
-    bm.pickedStatus.className = "pickedStatus";
-    bm.pickedStatus.innerHTML = "";
-  }
-  // Handle 'alt' key without 'shift'
-  else if (event.altKey && !event.shiftKey) {
-    bm.pickedStatus.className = "banned";
-    bm.overlay.style.opacity = "0.8";
-    bm.protect.style.opacity = "0";
-    bm.metadata.style.opacity = "0.3";
-    bm.difficulty.style.opacity = "0.3";
-    bm.pickedStatus.innerHTML = `Banned`;
-  }
-  // Handle both 'alt' and 'shift' keys
-  else if (event.altKey && event.shiftKey) {
-    bm.protect.style.opacity = "1";
-    bm.protect.innerHTML = "Protect";
-    bm.protect.style.backgroundColor = "#2982e3";
-    bm.pickedStatus.className = "pickedStatus";
-    bm.overlay.style.opacity = "0.5";
-    bm.metadata.style.opacity = "1";
-    bm.difficulty.style.opacity = "1";
-  } 
-  // Default action
-  else {
-    bm.PickedOn("Blue");
-    if (bm.beatmapID == 1 || bm.beatmapID == 0) {
-      pickedWC(bm.beatmapID, bm.pickedStatus.className);
-    }
-  }
-});
+    bm.clicker.addEventListener("mousedown", function (event) {
+      // Ignore the mousedown event if the button is not the left mouse button
+      if (event.button !== 0) {
+        return; // Only proceed for left-click (button 0)
+      }
+    
+      // Handle 'shift' key without 'alt'
+      if (event.shiftKey && !event.altKey) {
+        bm.pickedStatus.className = "bannedRed";
+        bm.overlay.style.opacity = "0.8";
+        bm.metadata.style.opacity = "0.3";
+        bm.protect.style.opacity = "0";
+        bm.difficulty.style.opacity = "0.3";
+        bm.pickedStatus.innerHTML = `Banned by ${team1}`;
+      }
+      // Handle 'ctrl' key
+      else if (event.ctrlKey) {
+        bm.overlay.style.opacity = "0.5";
+        bm.metadata.style.opacity = "1";
+        bm.difficulty.style.opacity = "1";
+        bm.protect.style.opacity = "0";
+        bm.pickedStatus.className = "pickedStatus";
+        bm.pickedStatus.innerHTML = "";
+      }
+      // Handle 'alt' key without 'shift'
+      else if (event.altKey && !event.shiftKey) {
+        bm.pickedStatus.className = "banned";
+        bm.overlay.style.opacity = "0.8";
+        bm.metadata.style.opacity = "0.3";
+        bm.protect.style.opacity = "0";
+        bm.difficulty.style.opacity = "0.3";
+        bm.pickedStatus.innerHTML = `Banned`;
+      }
+      // Handle both 'alt' and 'shift' keys
+      else if (event.altKey && event.shiftKey) {
+        bm.pickedStatus.className = "pickedStatus";
+        bm.protect.style.opacity = "1";
+        bm.protect.innerHTML = "Protect";
+        bm.protect.style.backgroundColor = "#de3950";
+        bm.overlay.style.opacity = "0.5";
+        bm.metadata.style.opacity = "1";
+        bm.difficulty.style.opacity = "1";
+      } 
+      // Default action
+      else {
+        bm.PickedOn("Red");
+        if (bm.beatmapID == 1 || bm.beatmapID == 0) {
+          pickedWC(bm.beatmapID, bm.pickedStatus.className);
+        }
+      }
+    });
+    
+    bm.clicker.addEventListener("contextmenu", function (event) {
+      // Prevent default right-click context menu
+      event.preventDefault();
+    
+      // Handle 'shift' key without 'alt'
+      if (event.shiftKey && !event.altKey) {
+        bm.pickedStatus.className = "bannedBlue";
+        bm.overlay.style.opacity = "0.8";
+        bm.protect.style.opacity = "0";
+        bm.metadata.style.opacity = "0.3";
+        bm.difficulty.style.opacity = "0.3";
+        bm.pickedStatus.innerHTML = `Banned by ${team2}`;
+      }
+      // Handle 'ctrl' key
+      else if (event.ctrlKey) {
+        bm.overlay.style.opacity = "0.5";
+        bm.metadata.style.opacity = "1";
+        bm.difficulty.style.opacity = "1";
+        bm.protect.style.opacity = "0";
+        bm.pickedStatus.className = "pickedStatus";
+        bm.pickedStatus.innerHTML = "";
+      }
+      // Handle 'alt' key without 'shift'
+      else if (event.altKey && !event.shiftKey) {
+        bm.pickedStatus.className = "banned";
+        bm.overlay.style.opacity = "0.8";
+        bm.protect.style.opacity = "0";
+        bm.metadata.style.opacity = "0.3";
+        bm.difficulty.style.opacity = "0.3";
+        bm.pickedStatus.innerHTML = `Banned`;
+      }
+      // Handle both 'alt' and 'shift' keys
+      else if (event.altKey && event.shiftKey) {
+        bm.protect.style.opacity = "1";
+        bm.protect.innerHTML = "Protect";
+        bm.protect.style.backgroundColor = "#2982e3";
+        bm.pickedStatus.className = "pickedStatus";
+        bm.overlay.style.opacity = "0.5";
+        bm.metadata.style.opacity = "1";
+        bm.difficulty.style.opacity = "1";
+      } 
+      // Default action
+      else {
+        bm.PickedOn("Blue");
+        if (bm.beatmapID == 1 || bm.beatmapID == 0) {
+          pickedWC(bm.beatmapID, bm.pickedStatus.className);
+        }
+      }
+    });
 
     const mapData = await getDataSet(beatmap.beatmapId);
     bm.map.style.backgroundImage = `url('${mapData.coverURL}')`;
@@ -439,44 +446,78 @@ async function fetchData(matchID) {
 }
 
 
-async function generateCard(data){
-// Get the container div with id "gacor"
-const container = document.getElementById("gacor");
-const backgrounds = [];
-console.log(data)
+async function generateCard(data) {
+  const container = document.getElementById("gacor");
+  let backgrounds = [];
+  const localCache = JSON.parse(localStorage.getItem("backgroundCache")) || { hash: null, backgrounds: {}, fetchedIDs: [] };
 
-// Array of background images
-for (let i = 0; i < Object.keys(data).length - 1; i++) {
-  const id = Object.keys(data)[i];
-  console.log(id)
-  try {
-    const response = await fetch(`https://gulanovapi.vercel.app/api/b/${id}`);
-    const result = await response.json();
+  // Generate a hash of the current IDs from data
+  const currentIDs = Object.keys(data).slice(0, -1); // Exclude the last key
+  const currentHash = generateHash(currentIDs.join(",")); // Create a hash of the concatenated IDs
 
-    console.log(result); // Log the result from the API
-    backgrounds.push(result.covers["card"])
-  } catch (error) {
-    console.error('Error fetching data:', error);
+  if (localCache.hash === currentHash) {
+    console.log("Cache is valid. Using cached backgrounds.");
+    backgrounds = Object.values(localCache.backgrounds);
+  } else {
+    console.log("Cache is outdated. Updating cache.");
+    const updatedBackgrounds = { ...localCache.backgrounds }; // Clone current backgrounds
+    const fetchedIDs = new Set(localCache.fetchedIDs); // Convert fetched IDs to a set
+
+    // Remove IDs that no longer exist in the current list
+    for (const id of fetchedIDs) {
+      if (!currentIDs.includes(id)) {
+        delete updatedBackgrounds[id];
+        fetchedIDs.delete(id);
+      }
+    }
+
+    // Fetch missing IDs
+    for (const id of currentIDs) {
+      if (!fetchedIDs.has(id)) {
+        try {
+          const response = await fetch(`https://gulanovapi.vercel.app/api/b/${id}`);
+          const result = await response.json();
+          console.log(`Fetched background for ID ${id}:`, result.covers["card"]);
+          updatedBackgrounds[id] = result.covers["card"];
+          fetchedIDs.add(id);
+        } catch (error) {
+          console.error(`Error fetching background for ID ${id}:`, error);
+        }
+      }
+    }
+
+    // Update the cache with new data
+    localStorage.setItem(
+      "backgroundCache",
+      JSON.stringify({ hash: currentHash, backgrounds: updatedBackgrounds, fetchedIDs: Array.from(fetchedIDs) })
+    );
+
+    backgrounds = Object.values(updatedBackgrounds);
+  }
+
+  console.log("Final backgrounds:", backgrounds);
+
+  // Clear the container and populate it with new elements
+  container.innerHTML = ""; // Clear any existing content in the container
+  for (let i = 1; i <= 50; i++) {
+    const itemDiv = document.createElement("div");
+    itemDiv.id = `item${i}`;
+    itemDiv.className = "rollItem";
+    const randomIndex = Math.floor(Math.random() * backgrounds.length);
+    itemDiv.style.backgroundImage = `url("${backgrounds[randomIndex]}")`;
+    itemDiv.innerHTML = "?";
+    container.appendChild(itemDiv);
   }
 }
-console.log(backgrounds)
-
-// Loop through 1 to 50 to create 50 div elements
-for (let i = 1; i <= 50; i++) {
-  // Create a new div element
-  const itemDiv = document.createElement("div");
-  
-  // Set the id and class for the div
-  itemDiv.id = `item${i}`;
-  itemDiv.className = "rollItem";
-
-  // Set the background image to a random choice from the array
-  const randomIndex = Math.floor(Math.random() * backgrounds.length);
-  itemDiv.style.backgroundImage = `url("${backgrounds[randomIndex]}")`;
-  itemDiv.innerHTML = "?"
 
 
-  // Append the created div to the container
-  container.appendChild(itemDiv);
-}
+function generateHash(data) {
+  // Simple hash generation function for strings
+  let hash = 0;
+  for (let i = 0; i < data.length; i++) {
+    const char = data.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash |= 0; // Convert to 32-bit integer
+  }
+  return hash;
 }
