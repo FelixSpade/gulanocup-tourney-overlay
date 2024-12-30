@@ -21,10 +21,33 @@
         </div>
         <div id="rollercontainer">
             <div id="gacor">
-
+    
+            </div>
         </div>
-
+        <div id="winnerPopup">
+                <div class="text-wrapper">
+                    <h1 id="WCArtistTitle" class="winnerText">Artist - Title</h1>
+                </div>
+                <div class="text-wrapper">
+                    <h2 id="WCdiff" class="winnerText">[Diffname]</h2>
+                </div>
+                <div class="text-wrapper">
+                    <p id="WCmapper" class="winnerText">Mapped by x</p>
+                </div>
+                <div class="text-wrapper">
+                    <div id="breakLine"></div>
+                </div>
+                <div class="text-wrapper">
+                    <h2 id="WCsubmitter" class="winnerText">Submitted by</h2>
+                </div>
+                <!-- 
+                     const WCArtist = document.getElementById("WCArtistTitle");
+                     const WCdiff =  document.getElementById("WCdiff");
+                     const WCmapper =  document.getElementById("WCmapper");
+                     const WCsubmitter =  document.getElementById("WCsubmitter");
+                -->
         </div>
+    
     </div>
     <div id="main">
         <!-- <div id="topBar"></div> -->
@@ -37,6 +60,7 @@
             <div id="TB" class="mapContainer"></div>
         </div>
         <!-- <div id="bottom"></div> -->
+         
     </div>
     <div id="sideBar">
         <div id="pickButtonR" class="pickButton"></div>
@@ -55,41 +79,159 @@
     </div>
     <script src="index.js"></script>
     <script>
+
         const gacor = document.getElementById("gacor");
-        document.getElementById("tutupwilcard").addEventListener("click", function() {
-        document.getElementById("pickerWC").style.visibility = "hidden";
-        const rollItems = document.querySelectorAll(".rollItem");
-        
-        // Loop through each element and remove it
-        rollItems.forEach(item => {
-        item.remove();
+
+
+        WCArtist = document.getElementById("WCArtistTitle");
+        WCdiff =  document.getElementById("WCdiff");
+        WCmapper =  document.getElementById("WCmapper");
+        WCsubmitter =  document.getElementById("WCsubmitter");
+
+
+        // Event listener untuk tombol "tutupwilcard"
+        document.getElementById("tutupwilcard").addEventListener("click", function () {
+            document.getElementById("pickerWC").style.visibility = "hidden";
+            document.getElementById("winnerPopup").style.opacity = "0";
+            
+    
+            // Hapus semua elemen dengan class "rollItem"
+            const rollItems = document.querySelectorAll(".rollItem");
+            rollItems.forEach(item => item.remove());
+    
+            // Sesuaikan margin-top elemen "gacor"
+            gacor.style.marginTop = "10px";
         });
 
-        gacor.style.marginTop = "10px"
-    });
-        document.getElementById("roll").addEventListener("click", function() {
-        
-        gacor.style.marginTop = "-4690px"
-        // gacor.style.marginTop = "-4780px"
 
-        const matchID = document.getElementById("matchID"); if (!matchID.value) {matchID.value = "woi"; return;;;;;;;;;;;} //if kosong, GAJADI LOL
-        const url = `https://script.google.com/macros/s/AKfycbxyQ67MlGCrIK3AMNDdJ28ZS_vYqvSmR1T6bS-kr4-q06hMhPi2g-ERErw1nrfxCv4-TA/exec?action=sendToRef&matchID=${matchID.value}`;
-        
-        try {   
-            const response = fetch(url);
-            const data = response.json();  // Get JSON data from response
-            console.log('Fetched data:', data);  // Log the fetched data
-            return data;  // Return the data to the calling function
-        } catch (error) {
-            console.error('Error fetching data:', error);  // Catch any errors
-            return null;  // Return null in case of an error
+
+        let pickedid = 0
+        async function roll(){
+            // Sesuaikan margin-top elemen "gacor"
+            marginval = Math.floor(Math.random() * (-4300 - -4380 + 1)) + -4380;
+            gacor.style.marginTop = `${marginval}px`;  // Add 'px' for pixel values
+            // gacor.style.marginTop = "-4780px";
+    
+            // Ambil nilai matchID
+            const matchID = document.getElementById("matchID");
+            if (!matchID.value) {
+                matchID.value = "woi";
+                return; // Jika kosong, keluar dari fungsi
+            }
+    
+            // URL untuk fetch data
+            const url = `https://script.google.com/macros/s/AKfycbxyQ67MlGCrIK3AMNDdJ28ZS_vYqvSmR1T6bS-kr4-q06hMhPi2g-ERErw1nrfxCv4-TA/exec?action=sendToRef&matchID=${matchID.value}`;
+    
+            try {
+                // Tunggu response dari fetch
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+    
+                // Parse response JSON
+                // const data = await response.text()
+                // pickedid = data
+                // console.log('Fetched data:', data); // Log data yang diperoleh
+                
+                // // change winner div
+                // const localCache = JSON.parse(localStorage.getItem("backgroundCache")) || { hash: null, backgrounds: {}, fetchedIDs: [] };
+                // winnerdiv = document.getElementById("item45");
+                // backgrounds = localCache.backgrounds;
+                // console.log(backgrounds)
+                // console.log(backgrounds[Number(data)])
+                // winnerdiv.style.backgroundImage = `url("${backgrounds[Number(data)]}")`
+               
+
+            } catch (error) {
+                console.error('Error fetching data:', error); // Tangkap kesalahan jika ada
+                return null; // Return null jika terjadi kesalahan
+            }
         }
 
+        // Event listener untuk tombol "roll"
+        document.getElementById("roll").addEventListener("click", async function () {
+            await roll()
+            console.log("picked id =", pickedid)
+            winnerMapData = await getDataSet2(pickedid);
+            console.log(winnerMapData)
+
+
+            setTimeout(() => {
+            console.log("10 seconds passed! Doing the action now.");
+            // Add your code here
+            winnerpopup = document.getElementById("winnerPopup");
+            winnerpopup.style.opacity = "1";
+            
+            
+            bg = document.getElementById("id-active-BG");
+            metadata = document.getElementById("id-active-metadata");
+            difficulty = document.getElementById("id-active-difficulty");
+            
+            bg.style.backgroundImage = `url('${winnerMapData.coverURL}')`;
+            metadata.innerHTML = winnerMapData.artist + " - " + winnerMapData.title;
+            difficulty.innerHTML =
+            `[${winnerMapData.version}]` + "&emsp;&emsp;Mapper: " + winnerMapData.creator;
+
+            winnerpopup.style.backgroundImage = `url('${winnerMapData.coverURL}')`;
+            WCArtist.innerHTML = winnerMapData.artist + " - " + winnerMapData.title;
+            WCdiff.innerHTML = `[${winnerMapData.version}]`;
+            WCmapper.innerHTML = "Mapped by" + winnerMapData.creator;
+
+            
+            
+            if(!document.getElementById('id-complete-clicker')){
+            const parentElement = document.getElementById('WC');
+            const elements = parentElement.querySelectorAll('[id^="id-active"]');
+            elements.forEach(element => {
+                const newId = element.id.replace("id-active", "id-complete");
+                element.id = newId;
+            });
+
+            resetEventListeners(document.getElementById("id-complete-clicker"))
+            }else{
+                const parentElement = document.getElementById('WC');
+                const elements = parentElement.querySelectorAll('[id^="id-active"]');
+                elements.forEach(element => {
+                    const newId = element.id.replace("id-active", "id-complete2");
+                    element.id = newId;
+                });
+
+                resetEventListeners(document.getElementById("id-complete2-clicker"))
+            }
+            pickedid = 0
             
 
-    });
+        }, 10000); // 10000 milliseconds = 10 seconds
+        }); 
 
-</script>
+        async function getDataSet2(beatmapID) {
+        try {
+            const data = (await axios.get(`https://gulanovapi.vercel.app/api/b/${beatmapID}`))
+            .data;
+            console.log("data is", data)
+            
+            const diff = data.beatmaps.filter((diff) => diff.id === Number(beatmapID)).shift();
+
+            return {
+            coverURL: data.covers["cover@2x"],
+            artist: data.artist,
+            title: data.title,
+            version: diff.version,
+            creator: data.creator,
+            };
+        } catch (error) {
+            console.error(error);
+        }
+        }
+
+        function resetEventListeners(element) {
+            const clone = element.cloneNode(true); // Clone the element (deep clone by default)
+            element.parentNode.replaceChild(clone, element); // Replace the original with the clone
+            return clone; // Return the new cloned element if further manipulation is needed
+        }
+
+    </script>
 </body>
 
 </html>

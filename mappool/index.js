@@ -373,7 +373,6 @@ async function getDataSet(beatmapID) {
     const data = (await axios.get(`https://gulanovapi.vercel.app/api/b/${beatmapID}`))
       .data;
     const diff = data.beatmaps.filter((diff) => diff.id === beatmapID).shift();
-
     return {
       coverURL: data.covers["cover@2x"],
       artist: data.artist,
@@ -422,11 +421,31 @@ async function pickedWC(id, banned){
   if(id == 1){
     generateCard(data)
     console.log(data);
+    const parentElement = document.getElementById('WC');
+
+    // Get all child elements inside the parent that have an id starting with "id-1"
+    const elements = parentElement.querySelectorAll('[id^="id-1"]');
+
+    // Loop through each element and update its id
+    elements.forEach(element => {
+        const newId = element.id.replace("id-1", "id-active");
+        element.id = newId;
+    });
     
     
   }else if(id == 0){
     generateCard(data)
     console.log(data);
+    const parentElement = document.getElementById('WC');
+
+    // Get all child elements inside the parent that have an id starting with "id-1"
+    const elements = parentElement.querySelectorAll('[id^="id-0"]');
+
+    // Loop through each element and update its id
+    elements.forEach(element => {
+        const newId = element.id.replace("id-0", "id-active");
+        element.id = newId;
+    });
   }
 
   pickerWC.style.visibility = "visible"
@@ -436,8 +455,7 @@ async function fetchData(matchID) {
 
   try {
     const response = await fetch(url);
-    const data = await response.json();  // Get JSON data from response
-    console.log('Fetched data:', data);  // Log the fetched data
+    const data = await response.json();  // Log the fetched data
     return data;  // Return the data to the calling function
   } catch (error) {
     console.error('Error fetching data:', error);  // Catch any errors
@@ -495,7 +513,7 @@ async function generateCard(data) {
     backgrounds = Object.values(updatedBackgrounds);
   }
 
-  console.log("Final backgrounds:", backgrounds);
+ 
 
   // Clear the container and populate it with new elements
   container.innerHTML = ""; // Clear any existing content in the container
@@ -506,8 +524,21 @@ async function generateCard(data) {
     const randomIndex = Math.floor(Math.random() * backgrounds.length);
     itemDiv.style.backgroundImage = `url("${backgrounds[randomIndex]}")`;
     itemDiv.innerHTML = "?";
+    
     container.appendChild(itemDiv);
   }
+
+  const backgroundDongo = localCache.backgrounds;
+  console.log("data original", data)
+  winnerdiv = document.getElementById("item45");
+  console.log(Number(data.picked[0]))
+  winnerdiv.style.backgroundImage = `url(${backgroundDongo[data.picked[0]]})`
+  
+  
+  WCsubmitter.innerHTML = "Submitted by " + data.picked[1];
+  pickedid = data.picked[0]
+  
+  
 }
 
 
