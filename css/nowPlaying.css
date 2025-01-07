@@ -18,9 +18,10 @@
 
 #nowPlayingContainer {
 	position: absolute;
-	width: 930px;
-	margin: 15px;
-	height: 80px;
+	width: 645px;
+    margin: 15px;
+    height: 80px;
+    margin-right: 300px;
 	background-color: black;
 	background-size: cover;
 	background-position: center center;

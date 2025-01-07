@@ -13,6 +13,10 @@
 </head>
 
 <body>
+    <audio id="audio">
+        <source src="../static/blog.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
     <div id="pickerWC">
         <div id="pointerWC">
             <div id="pointerkiri" class="pointerobj"></div>
@@ -65,7 +69,13 @@
     <div id="sideBar">
         <div id="pickButtonR" class="pickButton" style="display: none;"></div>
         <div id="pickButtonB" class="pickButton" style="display: none;"></div>
-        
+        <div id="shortcut">
+            <a>RIGHT CLICK RED | LEFT CLICK BLUE<br>
+            ALT + CLICK : BAN PUTIH<br>
+            SHIFT + CLICK : BAN <br>
+            ALT + SHIFT + CLICK : PROTECT<br>
+            CTRL + CLICK : RESET<br></a>
+        </div>
         <div id="pickState" style="display: none;">First Team to pick: </div>
         <div id="getMappool" class="pickButton">DOWNLOAD MAPPOOL</div>
         <div style="margin-top: 20px;">Input manual wildcard MAP ID</div>
@@ -83,7 +93,7 @@
 
         const gacor = document.getElementById("gacor");
 
-
+        const mappoolcontainertriggerwc = document.getElementById("mappoolContainer");
         WCArtist = document.getElementById("WCArtistTitle");
         WCdiff =  document.getElementById("WCdiff");
         WCmapper =  document.getElementById("WCmapper");
@@ -102,6 +112,7 @@
     
             // Sesuaikan margin-top elemen "gacor"
             gacor.style.marginTop = "10px";
+            mappoolcontainertriggerwc.style.opacity = "100%"
         });
 
 
@@ -109,16 +120,13 @@
         let pickedid = 0
         async function roll(){
             // Sesuaikan margin-top elemen "gacor"
+
             marginval = Math.floor(Math.random() * (-4300 - -4380 + 1)) + -4380;
             gacor.style.marginTop = `${marginval}px`;  // Add 'px' for pixel values
             // gacor.style.marginTop = "-4780px";
     
             // Ambil nilai matchID
-            const matchID = document.getElementById("matchID");
-            if (!matchID.value) {
-                matchID.value = "woi";
-                return; // Jika kosong, keluar dari fungsi
-            }
+
     
             // URL untuk fetch data
             const url = `https://script.google.com/macros/s/AKfycbxyQ67MlGCrIK3AMNDdJ28ZS_vYqvSmR1T6bS-kr4-q06hMhPi2g-ERErw1nrfxCv4-TA/exec?action=sendToRef&matchID=${matchID.value}`;
@@ -152,6 +160,13 @@
 
         // Event listener untuk tombol "roll"
         document.getElementById("roll").addEventListener("click", async function () {
+            var audio = document.getElementById("audio");
+            audio.play();
+            const matchID = document.getElementById("matchID");
+            if (!matchID.value || matchID.value == "woi") {
+                matchID.value = "woi";
+                return; // Jika kosong, keluar dari fungsi
+            }
             await roll()
             console.log("picked id =", pickedid)
             winnerMapData = await getDataSet2(pickedid);
@@ -178,6 +193,17 @@
             WCArtist.innerHTML = winnerMapData.artist + " - " + winnerMapData.title;
             WCdiff.innerHTML = `[${winnerMapData.version}]`;
             WCmapper.innerHTML = "Mapped by" + winnerMapData.creator;
+            
+            const audio = new Audio(winnerMapData.preview);
+
+            // Play the audio
+            audio.play()
+            .then(() => {
+                console.log("Audio is playing!");
+            })
+            .catch(error => {
+                console.error("Error playing audio:", error);
+            });
 
             
             
@@ -220,6 +246,7 @@
             title: data.title,
             version: diff.version,
             creator: data.creator,
+            preview: data.preview_url
             };
         } catch (error) {
             console.error(error);

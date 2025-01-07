@@ -37,6 +37,8 @@ html {
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+    transition: opacity 0.5s ease-in-out;
+    
 }
 
 .mapContainer {
@@ -322,7 +324,7 @@ html {
     top: 50%;
     transform: translate(-50%, -50%);
     border-radius: 20px;
-    box-shadow: inset 0px 0px 0px 199px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0px 0px 0px 199px rgba(0, 0, 0, 0.5), 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -338,6 +340,19 @@ html {
     transition: opacity 0.5s ease-in-out
 }
 
+#winnerPopup::before {
+    content: "";
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5); /* Black color with 50% opacity */
+    z-index: 1; /* Place the overlay above the background */
+}
+
+#winnerPopup-content {
+    position: relative;
+    z-index: 2; /* Place content above the overlay */
+    color: white; /* Example text color to ensure visibility */
+    padding: 10px;
+}
 
 .text-wrapper {
     width: 100%;
@@ -411,10 +426,9 @@ html {
     min-width: 1920px;
     min-height: 720px;
     z-index: 1;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(0px);
     overflow: hidden;
     visibility: hidden;
-    -webkit-mask-image: linear-gradient(rgba(0,0,0,0) 5%, rgba(0,0,0,1) 7%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 98%);
 }
 
 #pickerWCred{
@@ -531,4 +545,9 @@ html {
     transform: rotate(-90.00deg);
     left: 215px;
     top: 310px;
+}
+
+#shortcut{
+    font-size: 20px;
+    color: gray
 }

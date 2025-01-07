@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Parkin';
+    src: url('../fonts/demoparkin-v4ggx.otf') format('opentype');
+    font-weight: normal; /* Optional */
+    font-style: normal;  /* Optional */
+}
+
+body{
+    margin: 0px;
+}
+
+body img{
+    margin: 0;
+    position: absolute;
+    left: 144px;
+    top: 324px;
+    flex-shrink: 0;
+    z-index: 2;
+    border-radius: 100px;
+    /* border: 21px solid #79D1DA; */
+    width: 425px;
+    height: 425px;
+}
+
+body div {
+    position: absolute;
+    z-index: 2;
+    top: 580px;
+    left: 956px;
+    transform: translateX(-50%); /* Adjust to align properly */
+    font-family: Parkin;
+    font-size: 105px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: white;
+    text-align: center; /* Center-align the text */
+    filter: drop-shadow(10px 1px 6px black);
+}

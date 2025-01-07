@@ -521,8 +521,9 @@ async function pickedWC(id, banned){
         element.id = newId;
     });
   }
-
+  const mappoolcontainertriggerwc = document.getElementById("mappoolContainer");
   pickerWC.style.visibility = "visible"
+  mappoolcontainertriggerwc.style.opacity = "20%"
 }
 async function fetchData(matchID) {
   const url = `https://script.google.com/macros/s/AKfycbxyQ67MlGCrIK3AMNDdJ28ZS_vYqvSmR1T6bS-kr4-q06hMhPi2g-ERErw1nrfxCv4-TA/exec?action=getWC&matchID=${matchID}`;
