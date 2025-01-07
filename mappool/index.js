@@ -143,7 +143,7 @@ class Beatmap {
     this.pickedStatus.className = `picked${type}`;
     this.overlay.style.opacity = "0.5";
     this.metadata.style.opacity = "1";
-  this.protect.style.opacity = this.protect.style.opacity;
+    this.protect.style.opacity = this.protect.style.opacity;
     this.difficulty.style.opacity = "1";
     this.pickedStatus.innerHTML = "Picked";
   }
@@ -402,10 +402,84 @@ pickedOnManual = (id) => {
   }
 };
 
-document.querySelector("form").addEventListener("submit", function(event) {
+document.querySelector("form").addEventListener("submit", async function(event) {
   event.preventDefault(); // Prevents the default form submission
   const selectValue = document.getElementById("WCmapid").value;
   const inputValue = document.getElementById("inputWCmanual").value;
+
+  if(!inputValue){
+    inputValue = "input invalid"
+    return;
+  }
+
+  if(selectValue == 1){
+    const parentElement = document.getElementById('WC');
+    pickedOnManual(1)
+    // Get all child elements inside the parent that have an id starting with "id-1"
+    const elements = parentElement.querySelectorAll('[id^="id-1"]');
+    wc1 = document.getElementById("id-1-status");
+
+    wc1.className = "pickedRed";
+    wc1.innerHTML = "Picked"
+    // Loop through each element and update its id
+    elements.forEach(element => {
+        const newId = element.id.replace("id-1", "id-active");
+        element.id = newId;
+    });
+    
+    
+    
+  }else if(selectValue == 0){
+    const parentElement = document.getElementById('WC');
+    pickedOnManual(0)
+    wc0 = document.getElementById("id-0-status");
+
+    wc0.className = "pickedBlue";
+    wc0.innerHTML = "Picked"
+    // Get all child elements inside the parent that have an id starting with "id-1"
+    const elements = parentElement.querySelectorAll('[id^="id-0"]');
+
+    // Loop through each element and update its id
+    elements.forEach(element => {
+        const newId = element.id.replace("id-0", "id-active");
+        element.id = newId;
+    });
+  }
+
+  winnermanual = await getDataSet(Number(inputValue));
+  console.log(winnermanual)
+
+  bg = document.getElementById("id-active-BG");
+  metadata = document.getElementById("id-active-metadata");
+  difficulty = document.getElementById("id-active-difficulty");
+            
+  bg.style.backgroundImage = `url('${winnermanual.coverURL}')`;
+  metadata.innerHTML = winnermanual.artist + " - " + winnermanual.title;
+  difficulty.innerHTML =
+  `[${winnermanual.version}]` + "&emsp;&emsp;Mapper: " + winnermanual.creator;
+
+  
+  if(!document.getElementById('id-complete-clicker')){
+  const parentElement = document.getElementById('WC');
+  const elements = parentElement.querySelectorAll('[id^="id-active"]');
+  elements.forEach(element => {
+      const newId = element.id.replace("id-active", "id-complete");
+      element.id = newId;
+  });
+
+  
+  resetEventListeners(document.getElementById("id-complete-clicker"))
+  }else{
+      const parentElement = document.getElementById('WC');
+      const elements = parentElement.querySelectorAll('[id^="id-active"]');
+      elements.forEach(element => {
+          const newId = element.id.replace("id-active", "id-complete2");
+          element.id = newId;
+      });
+
+      resetEventListeners(document.getElementById("id-complete2-clicker"))
+  }
+
   console.log(`${selectValue} ${inputValue}`);
 });
 

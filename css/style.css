@@ -5,12 +5,50 @@
 	--left-score-bar-color: #fff;
 	--right-score-bar-color: #fff;
 	--chat-color: rgba(0 0 0 / .75);
-	--bg: url('../static/mp-bg.png');
-	--bg2: url('../static/mp-bg2.png');
+	--bg: url('../static/bg1.png');
+	/* --bg2: url('../static/mp-bg2.png'); */
 	--font: url("../fonts/BeVietnamPro-Regular.ttf");
 	/* --mp-bg: url("../static/mp-bg.png");
 	--mp-bg2: url("../static/mp-bg2.png"); */
 }
+
+#video-bg-top{
+	position: relative;
+	height: 120px;
+	overflow-y: hidden;
+	left: 1px;
+    top: 1px;
+}
+
+#video-bg-bottom{
+	position: relative;
+	height: 243px;
+	margin-top: 720px;
+	overflow-y: hidden;
+	left: 1px;
+    bottom: 2px;
+}
+
+
+.video-bg{
+	position: relative;
+	object-fit: cover;
+	max-width: 100%;
+	max-width: 100%;
+	z-index: -1;
+	opacity: 100%;
+
+}
+
+#behindvideo{
+	position:absolute;
+	width: 100%;
+	height: 100%;
+	background-image: var(--bg);
+	z-index: -2;
+}
+
+
 
 @font-face {
 	font-family: "Torus";
@@ -36,8 +74,8 @@ html {
 	font-family: Exo2, Helvetica, sans-serif;
 	font-weight: normal;
 	color: var(--text-color);
-	background-image: var(--bg);
-	/* background-color: #15151e; */
+	
+	/* background-color: 04102b; */
 	background-size: 100%;
 	width: 1920px;
 	height: 1080px;

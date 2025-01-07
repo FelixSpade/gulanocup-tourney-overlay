@@ -50,7 +50,8 @@
     position: absolute;
     width: 1920px;
     height: 1080px;
-    top: 0px;
+    left:1px;
+    top: 1px;
     background-image: var(--bg2);
     background-size: cover;
     background-repeat: no-repeat;

@@ -51,7 +51,7 @@
 	position: absolute;
 	width: 100px;
 	height: 100px;
-	border-radius: 10px;
+	border-radius: 35px;
 	margin-top: auto;
 	margin-bottom: auto;
 	top: 0;
@@ -61,11 +61,13 @@
 }
 
 #avatarLeft {
-	left: 10px;
+    left: 13px;
+    top: 4.5px;
 }
 
 #avatarRight {
-	right: 10px;
+    right: 10px;
+    top: 4.5px;
 }
 
 .avatar::after {
@@ -84,7 +86,7 @@
 	border-radius: 5px;
 }
 
-#avatarLeft.avatar::after{
+/* #avatarLeft.avatar::after{
 	right: -25px;
 	background-color: var(--left-avatar-line-color);
 	box-shadow: 0 0 10px 0 var(--left-avatar-line-color);
@@ -94,7 +96,7 @@
 	left: -25px;
 	background-color: var(--right-avatar-line-color);
 	box-shadow: 0 0 10px 0 var(--right-avatar-line-color);
-}
+} */
 
 .background--light {
 	color: #161616;
@@ -127,8 +129,8 @@
 .scoreLeft,
 .scoreRight {
 	width: 40px;
-	height: 10px;
-	background-color: rgba(255, 255, 255, 0.5);
+	/* height: 10px; */
+	background-image: "url(./static/pScoreNot.png)";
 	transition: ease-in-out 100ms;
 	border-radius: 5px;
 }

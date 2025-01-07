@@ -63,18 +63,19 @@
          
     </div>
     <div id="sideBar">
-        <div id="pickButtonR" class="pickButton"></div>
-        <div id="pickButtonB" class="pickButton"></div>
+        <div id="pickButtonR" class="pickButton" style="display: none;"></div>
+        <div id="pickButtonB" class="pickButton" style="display: none;"></div>
         
-        <div id="pickState">First Team to pick: </div>
+        <div id="pickState" style="display: none;">First Team to pick: </div>
+        <div id="getMappool" class="pickButton">DOWNLOAD MAPPOOL</div>
         <div style="margin-top: 20px;">Input manual wildcard MAP ID</div>
+        
         <form> <select id="WCmapid" class="pickButton">
             <option value="1">kiri</option>
             <option value="0" >kanan</option>
-          </select><input id="inputWCmanual" type="text" class="pickButton"></input></form>
-        <div id="resetWILDCARD" class="pickButton">Reset WC</div>
+          </select><input id="inputWCmanual" type="text" class="pickButton" placeholder="MapID"></input></form>
         <div id="tutupwilcard" class="pickButton">Close WC</div>
-        <input id="matchID" type="text" class="pickButton"></input>
+        <input id="matchID" type="text" class="pickButton" placeholder="Input Match ID"></input>
         <div id="roll" class="pickButton">Roll</div>
     </div>
     <script src="index.js"></script>
@@ -230,6 +231,33 @@
             element.parentNode.replaceChild(clone, element); // Replace the original with the clone
             return clone; // Return the new cloned element if further manipulation is needed
         }
+
+        document.getElementById("getMappool").addEventListener("click", async function () {
+            fetch("https://script.google.com/macros/s/AKfycbxm7vMh_kOHlt17h54f885yqeiDF3HhrX01PRWnKMX3TpvvcPO_eNJJlHUlTJ1bptW9FQ/exec?action=getActiveMappool&pool=update")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Convert the fetched data to a JSON string
+                const updatedData = JSON.stringify(data, null, 2);
+
+                // Simulate replacing the contents of "beatmaps.json" and downloading it
+                const blob = new Blob([updatedData], { type: "application/json" });
+                const link = document.createElement("a");
+                
+                // This triggers a download of the new data as "beatmaps.json"
+                link.href = URL.createObjectURL(blob);
+                link.download = "beatmaps.json";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+            .catch(error => console.error("Error fetching or saving the file:", error));
+        });
+
 
     </script>
 </body>

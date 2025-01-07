@@ -5,8 +5,9 @@
 	left: 0;
 	bottom: 0;
 	width: 930px;
-	height: 200px;
+	height: 190px;
 	margin: 15px;
+	margin-bottom: 20px;
 	border-radius: 10px;
 	box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.5);
 	overflow-y: scroll;
@@ -56,11 +57,12 @@
 }
 
 .left {
-	color: #1fd0ed;
+	color: #ed1855;
+	
 }
 
 .right {
-	color: #ed1855;
+	color: #1fd0ed;
 }
 
 /*Scrollbar*/

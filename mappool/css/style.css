@@ -32,7 +32,7 @@ html {
 
 #mappoolContainer {
     position: absolute;
-    top: 0px;
+    top: 15%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -79,7 +79,7 @@ html {
 }
 
 .mapInfo {
-    width: 100%;
+    width: 70%;
     margin-left: 20px;
     margin-right: 20px;
     color: #fff;
@@ -224,8 +224,7 @@ html {
     margin-top: auto;
     margin-bottom: auto;
     right: -22px;
-    width: 44px;
-    height: 31px;
+    width: 100px;
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -408,13 +407,14 @@ html {
 #pickerWC{
     position: fixed;
     /* background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.7) 100%); */
-    background: rgba(0, 0, 0, 0.3);
+    /* background: rgba(0, 0, 0, 0.3); */
     min-width: 1920px;
     min-height: 720px;
     z-index: 1;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px);
     overflow: hidden;
     visibility: hidden;
+    -webkit-mask-image: linear-gradient(rgba(0,0,0,0) 5%, rgba(0,0,0,1) 7%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 98%);
 }
 
 #pickerWCred{
@@ -445,7 +445,7 @@ html {
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
-    mask-image: linear-gradient(rgba(0,0,0,0) 5%, rgba(0,0,0,0.5) 10%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.5) 90%, rgba(0,0,0,0) 95%);
+    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 1) 7%, rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 98%);
 }
 
 #item45{

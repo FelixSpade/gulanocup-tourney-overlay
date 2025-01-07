@@ -1,19 +1,50 @@
 [
-  { "beatmapId": 4477594, "mods": "RC" },
-  { "beatmapId": 4467638, "mods": "RC" },
-  { "beatmapId": 4500005, "mods": "RC" },
-  { "beatmapId": 4440404, "mods": "RC" },
-  { "beatmapId": 4517522, "mods": "RC" },
-  { "beatmapId": 4186640, "mods": "RC" },
-  { "beatmapId": 4513475, "mods": "LN" },
-  { "beatmapId": 4526077, "mods": "LN" },
-  { "beatmapId": 4437980, "mods": "LN" },
-  { "beatmapId": 4493632, "mods": "HB" },
-  { "beatmapId": 4491150, "mods": "HB" },
-  { "beatmapId": 4522456, "mods": "HB" },
-  { "beatmapId": 4527113, "mods": "SV" },
-  { "beatmapId": 4526775, "mods": "SV" },
-  { "beatmapId": 1, "mods": "WC" },
-  { "beatmapId": 0, "mods": "WC" },
-  { "beatmapId": 4527115, "mods": "TB" }
+  {
+    "beatmapId": 4859707,
+    "mods": "RC"
+  },
+  {
+    "beatmapId": 4860042,
+    "mods": "RC"
+  },
+  {
+    "beatmapId": 4884894,
+    "mods": "RC"
+  },
+  {
+    "beatmapId": 4908209,
+    "mods": "RC"
+  },
+  {
+    "beatmapId": 4892200,
+    "mods": "LN"
+  },
+  {
+    "beatmapId": 4917448,
+    "mods": "LN"
+  },
+  {
+    "beatmapId": 4907782,
+    "mods": "HB"
+  },
+  {
+    "beatmapId": 4913079,
+    "mods": "HB"
+  },
+  {
+    "beatmapId": 4924554,
+    "mods": "SV"
+  },
+  {
+    "beatmapId": 1,
+    "mods": "WC"
+  },
+  {
+    "beatmapId": 0,
+    "mods": "WC"
+  },
+  {
+    "beatmapId": 4924528,
+    "mods": "TB"
+  }
 ]

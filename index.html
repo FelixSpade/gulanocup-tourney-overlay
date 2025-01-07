@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/topBar1.css" />
+		<link rel="stylesheet" href="css/topBar.css" />
 		<link rel="stylesheet" href="css/playingScore.css" />
 		<link rel="stylesheet" href="css/nowPlaying.css" />
 		<link rel="stylesheet" href="css/misc.css" />
@@ -12,12 +12,26 @@
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script src="deps/countUp.js"></script>
-		<script src="deps/reconnecting-websocket.min.js"></script>
+		<script src="deps/reconnecting-websocket.min.js"></script>	
 	</head>
 
 	<body>
 		<div id="main">
-			<div id="playArea"></div>
+			<div id="behindvideo"></div>
+			<div id="video-bg-top">
+			<video autoplay muted loop class="video-bg">
+				<source src="./static/vid-bg.mp4" type="video/mp4">
+			</video>
+			</div>
+			<div id="video-bg-bottom">
+			<video autoplay muted loop class="video-bg" style="top: -837px;">
+				<source src="./static/vid-bg.mp4" type="video/mp4">
+			</div>
+			</video>
+			<div id="playArea">
+				<video autoplay muted loop class="video-bg">
+				<source src="./static/vid-bg2.mp4" type="video/mp4">
+			</video></div>
 			<div id="teamName">
 				<div id="nameScoreContainer">
 					<div id="teamLeftName" class="teamName"></div>
