@@ -459,6 +459,9 @@ document.querySelector("form").addEventListener("submit", async function(event) 
   bg = document.getElementById("id-active-BG");
   metadata = document.getElementById("id-active-metadata");
   difficulty = document.getElementById("id-active-difficulty");
+  logo = document.getElementById("id-active-modicon");
+
+  logo.style.visibility = "visible";
             
   bg.style.backgroundImage = `url('${winnermanual.coverURL}')`;
   metadata.innerHTML = winnermanual.artist + " - " + winnermanual.title;

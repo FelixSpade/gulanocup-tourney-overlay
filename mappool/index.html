@@ -67,8 +67,8 @@
          
     </div>
     <div id="sideBar">
-        <div id="pickButtonR" class="pickButton" style="display: none;"></div>
-        <div id="pickButtonB" class="pickButton" style="display: none;"></div>
+        <div id="pickButtonR" class="pickButton"></div>
+        <div id="pickButtonB" class="pickButton"></div>
         <div id="shortcut">
             <a>RIGHT CLICK RED | LEFT CLICK BLUE<br>
             ALT + CLICK : BAN PUTIH<br>
@@ -194,7 +194,7 @@
             winnerpopup.style.backgroundImage = `url('${winnerMapData.coverURL}')`;
             WCArtist.innerHTML = winnerMapData.artist + " - " + winnerMapData.title;
             WCdiff.innerHTML = `[${winnerMapData.version}]`;
-            WCmapper.innerHTML = "Mapped by" + winnerMapData.creator;
+            WCmapper.innerHTML = "Mapped by " + winnerMapData.creator;
             
             const audio = new Audio(winnerMapData.preview);
 
