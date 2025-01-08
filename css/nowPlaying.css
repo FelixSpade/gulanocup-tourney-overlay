@@ -1,11 +1,13 @@
 .nowPlayingInMatch {
 	left: 0;
 	bottom: 0;
+	width: 930px;
 }
 
 .nowPlayingWaiting {
-	right: 0;
+	right: 285px;
 	bottom: 120px;
+	width: 645px;
 }
 
 .hidden {
@@ -18,10 +20,8 @@
 
 #nowPlayingContainer {
 	position: absolute;
-	width: 645px;
     margin: 15px;
     height: 80px;
-    margin-right: 300px;
 	background-color: black;
 	background-size: cover;
 	background-position: center center;

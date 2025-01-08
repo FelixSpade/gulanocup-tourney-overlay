@@ -8,13 +8,13 @@
 
 #deltaBarL {
 	background-color: var(--left-score-bar-color);
-	right: 50%;
+	right: 49.905%;
 	transform-origin: top right;
 }
 
 #deltaBarR {
 	background-color: var(--right-score-bar-color);
-	left: 50%;
+	left: 50.095%;
 	transform-origin: top left;
 }
 
