@@ -173,7 +173,7 @@ socket.onmessage = async (event) => {
 
   if (tempMapID !== data.menu.bm.id) {
     tempMapID = data.menu.bm.id;
-    pickedOnManual(tempMapID);
+    // pickedOnManual(tempMapID);
   }
 
   if (teamNameLeftTemp !== leftTeamName) {
@@ -394,19 +394,19 @@ async function getDataSet(beatmapID) {
 
 
 pickedOnManual = (id) => {
-  tempLastPick = tempLastPick === "Red" ? "Blue" : "Red";
-  if (document.getElementById(`id-${id}-clicker`)) {
-    let pickedStatus = document.getElementById(`id-${id}-status`);
-    let overlay = document.getElementById(`id-${id}-overlay`);
-    let metadata = document.getElementById(`id-${id}-metadata`);
-    let difficulty = document.getElementById(`id-${id}-difficulty`);
+  // tempLastPick = tempLastPick === "Red" ? "Blue" : "Red";
+  // if (document.getElementById(`id-${id}-clicker`)) {
+  //   let pickedStatus = document.getElementById(`id-${id}-status`);
+  //   let overlay = document.getElementById(`id-${id}-overlay`);
+  //   let metadata = document.getElementById(`id-${id}-metadata`);
+  //   let difficulty = document.getElementById(`id-${id}-difficulty`);
 
-    pickedStatus.className = `picked${tempLastPick}`;
-    overlay.style.opacity = "0.5";
-    metadata.style.opacity = "1";
-    difficulty.style.opacity = "1";
-    pickedStatus.innerHTML = "Picked";
-  }
+  //   pickedStatus.className = `picked${tempLastPick}`;
+  //   overlay.style.opacity = "0.5";
+  //   metadata.style.opacity = "1";
+  //   difficulty.style.opacity = "1";
+  //   pickedStatus.innerHTML = "Picked";
+  // }
 };
 
 document.querySelector("form").addEventListener("submit", async function(event) {
@@ -421,7 +421,7 @@ document.querySelector("form").addEventListener("submit", async function(event) 
 
   if(selectValue == 1){
     const parentElement = document.getElementById('WC');
-    pickedOnManual(1)
+    // pickedOnManual(1)
     // Get all child elements inside the parent that have an id starting with "id-1"
     const elements = parentElement.querySelectorAll('[id^="id-1"]');
     wc1 = document.getElementById("id-1-status");
@@ -438,7 +438,7 @@ document.querySelector("form").addEventListener("submit", async function(event) 
     
   }else if(selectValue == 0){
     const parentElement = document.getElementById('WC');
-    pickedOnManual(0)
+    // pickedOnManual(0)
     wc0 = document.getElementById("id-0-status");
 
     wc0.className = "pickedBlue";
