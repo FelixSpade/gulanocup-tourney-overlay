@@ -57,6 +57,7 @@ let animation = {
     separator: " ",
     decimal: ".",
   }),
+
 };
 
 socket.onclose = (event) => {

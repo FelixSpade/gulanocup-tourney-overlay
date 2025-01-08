@@ -322,6 +322,10 @@ socket.onmessage = (event) => {
     // setAvatar(avaRight, team2);
   }
 
+
+
+  
+
   if (scoreVisibleTemp) {
     let accLeft = 0.0;
     let accRight = 0.0;
@@ -371,6 +375,14 @@ socket.onmessage = (event) => {
         (960 - rightScoreWidth) *
         (960 - rightScoreWidth)
     );
+
+
+
+
+
+
+
+
 
     // console.log(rightOffset);
 

@@ -349,24 +349,31 @@ async function setupBeatmaps() {
         }
       }
     });
-
+    
     const mapData = await getDataSet(beatmap.beatmapId);
     bm.map.style.backgroundImage = `url('${mapData.coverURL}')`;
     bm.metadata.innerHTML = mapData.artist + " - " + mapData.title;
     bm.difficulty.innerHTML =
       `[${mapData.version}]` + "&emsp;&emsp;Mapper: " + mapData.creator;
     beatmaps.add(bm);
+
+    document.getElementById("id-1-difficulty").innerHTML = ""
+    document.getElementById("id-1-metadata").innerHTML = ""
+    document.getElementById("id-0-metadata").innerHTML = ""
+    document.getElementById("id-0-difficulty").innerHTML = ""
+    document.getElementById("id-0-modicon").style.visibility = "hidden";
+    document.getElementById("id-1-modicon").style.visibility = "hidden";
   });
 }
 
 async function getDataSet(beatmapID) {
   if(beatmapID == 1 || beatmapID == 0){
     return {
-        coverURL: './static/placeholder.jpg',
-        artist: "?",
-        title: "?",
-        version: "?",
-        creator: "?"
+        coverURL: '../static/placeholder.png',
+        artist: "",
+        title: "",
+        version: "",
+        creator: ""
     }
 }
   try {

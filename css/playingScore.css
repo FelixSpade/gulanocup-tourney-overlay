@@ -65,3 +65,19 @@
 	text-align: left;
 	left: 50%;
 }
+
+#playScoreLeftACC{
+	color: var(--text-color);
+	text-align: right;
+	right: 50%;
+	font-size: 25px;
+    top: 20px;
+}
+
+#playScoreRightACC{
+	color: var(--text-color);
+	text-align: left;
+	left: 50%;
+	font-size: 25px;
+    top: 20px;
+}
